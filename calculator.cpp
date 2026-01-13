@@ -17,7 +17,7 @@ int main() {
     do {
         cout << "\nEnter first number: ";
         cin >> num1;
-// cout << "Enter"
+// cout
         cout << "Enter operator (+ - * /): ";
         cin >> op;
 
