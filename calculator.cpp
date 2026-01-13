@@ -1,3 +1,7 @@
+//Hello this is Calculator
+// sample calculator c++ program 
+// this code written from Ilgiz Satkynov
+
 #include <iostream>
 using namespace std;
 
@@ -6,12 +10,14 @@ int main() {
     char op;
     char choice;
 
-    cout << "🧮 Simple C++ Calculator\n";
+    cout << "Simple C++ Calculator\n";
+     // start simple 
+     // also this is "-", "+", "'=", "*" 
 
     do {
         cout << "\nEnter first number: ";
         cin >> num1;
-
+// cout << "Enter"
         cout << "Enter operator (+ - * /): ";
         cin >> op;
 
@@ -32,17 +38,18 @@ int main() {
                 if (num2 != 0)
                     cout << "Result: " << num1 / num2 << endl;
                 else
-                    cout << "❌ Error: Division by zero!" << endl;
+                    cout << "Error: Division by zero!" << endl;
                 break;
             default:
-                cout << "❌ Invalid operator!" << endl;
+                cout << "Invalid operator!" << endl;
         }
 
+        //Error code for calculator
         cout << "\nDo another calculation? (y/n): ";
         cin >> choice;
 
     } while (choice == 'y' || choice == 'Y');
 
-    cout << "Goodbye! 👋\n";
+    cout << "Goodbye!\n";
     return 0;
 }
