@@ -40,11 +40,12 @@ int main() {
                 else
                     cout << "Error: Division by zero!" << endl;
                 break;
+                // Invalid operator
             default:
                 cout << "Invalid operator!" << endl;
         }
 
-        //Error code for calculator
+        //Error message for calculator
         cout << "\nDo another calculation? (y/n): ";
         cin >> choice;
 
@@ -53,3 +54,4 @@ int main() {
     cout << "Goodbye!\n";
     return 0;
 }
+
