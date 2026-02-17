@@ -1,4 +1,7 @@
 //Ilgiz Satkynov
+//Date: Feb 17, 2026
+// Course: CIS 22A
+// Midterm Part 1 - Coding Part
 //Description: De Anza Food Court Kiosk - An interactive ordering system 
 //that handles custom quantities, tax exemptions for students, and file-based billing.
 
