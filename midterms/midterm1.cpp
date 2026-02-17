@@ -1,9 +1,8 @@
-//Ilgiz Satkynov
-//Date: Feb 17, 2026
+// Name: Ilgiz Satkynov
+// Date: Feb 17, 2026
 // Course: CIS 22A
-// Midterm Part 1 - Coding Part
-//Description: De Anza Food Court Kiosk - An interactive ordering system 
-//that handles custom quantities, tax exemptions for students, and file-based billing.
+// Description: De Anza Food Court Kiosk. This program handles burger orders,
+// validates that the cart isn't empty before checkout, and saves the receipt.
 
 #include <iostream>
 #include <iomanip>
@@ -24,11 +23,11 @@ int main() {
     int q1 = 0, q2 = 0, q3 = 0, q4 = 0, q5 = 0;
     int choice = 0;
 
-    //2.INTERACTIVE MENU LOOP
     cout << "==========================================" << endl;
     cout << "   WELCOME TO DE ANZA FOOD COURT KIOSK    " << endl;
     cout << "==========================================" << endl;
 
+    // 2. INTERACTIVE MENU LOOP
     while (choice != 6) {
         cout << "\n1. De Anza Burger   [$" << P1 << "]" << endl;
         cout << "2. Bacon Cheese     [$" << P2 << "]" << endl;
@@ -54,12 +53,19 @@ int main() {
                 else if (choice == 5) q5 += amount;
                 cout << ">> Added to cart." << endl;
             }
-        } else if (choice != 6) {
+        } 
+        // Logic added here: Check if cart is empty when choosing option 6
+        else if (choice == 6) {
+            if (q1 == 0 && q2 == 0 && q3 == 0 && q4 == 0 && q5 == 0) {
+                cout << "!! Your cart is empty. Please order something before checking out !!" << endl;
+                choice = 0; // Reset choice so the loop continues
+            }
+        } 
+        else {
             cout << "!! Invalid Selection. Please use 1-6 !!" << endl;
         }
     }
-
-    //3. CUSTOMER TYPE
+    // 3. CUSTOMER TYPE
     char type;
     cout << "\nAre you a Student (s) or Staff (t)? ";
     cin >> type;
@@ -68,29 +74,50 @@ int main() {
     double tax = (type == 't' || type == 'T') ? (subtotal * TAX_RATE) : 0.0;
     double total = subtotal + tax;
 
-    //4. RECEIPT GENERATION (Console & File)
+    // 4. RECEIPT GENERATION
     ofstream outFile("output.txt");
+    cout << fixed << setprecision(2);
     
-    // Logic to print to both locations
-    ostream* outputs[] = { &cout, &outFile };
+    // Output to Screen
+    cout << "\n--------- DE ANZA RECEIPT ---------" << endl;
+    if (q1 > 0) cout << "De Anza Burger   x" << q1 << "  $" << q1*P1 << endl; 
+    if (q2 > 0) cout << "Bacon Cheese     x" << q2 << "  $" << q2*P2 << endl;
+    if (q3 > 0) cout << "Mushroom Swiss   x" << q3 << "  $" << q3*P3 << endl;
+    if (q4 > 0) cout << "Western Burger   x" << q4 << "  $" << q4*P4 << endl;
+    if (q5 > 0) cout << "Don Cali Burger  x" << q5 << "  $" << q5*P5 << endl;
+    cout << "-----------------------------------" << endl;
+    cout << "Subtotal:        $" << subtotal << endl;
+    cout << "Tax:             $" << tax << endl;
+    cout << "TOTAL:           $" << total << endl;
+    cout << "-----------------------------------" << endl;
 
-    for (int i = 0; i < 2; i++) {
-        *outputs[i] << fixed << setprecision(2);
-        *outputs[i] << "\n--------- DE ANZA RECEIPT ---------" << endl;
-        if (q1 > 0) *outputs[i] << "De Anza Burger   x" << q1 << "  $" << q1*P1 << endl; 
-        if (q2 > 0) *outputs[i] << "Bacon Cheese     x" << q2 << "  $" << q2*P2 << endl;
-        if (q3 > 0) *outputs[i] << "Mushroom Swiss   x" << q3 << "  $" << q3*P3 << endl;
-        if (q4 > 0) *outputs[i] << "Western Burger   x" << q4 << "  $" << q4*P4 << endl;
-        if (q5 > 0) *outputs[i] << "Don Cali Burger  x" << q5 << "  $" << q5*P5 << endl;
-        *outputs[i] << "-----------------------------------" << endl;
-        *outputs[i] << "Subtotal:        $" << subtotal << endl;
-        *outputs[i] << "Tax:             $" << tax << endl;
-        *outputs[i] << "TOTAL:           $" << total << endl;
-        *outputs[i] << "-----------------------------------" << endl;
+    // Output to File
+    if (outFile.is_open()) {
+        outFile << fixed << setprecision(2);
+        outFile << "--------- DE ANZA RECEIPT ---------" << endl;
+        if (q1 > 0) outFile << "De Anza Burger   x" << q1 << "  $" << q1*P1 << endl; 
+        if (q2 > 0) outFile << "Bacon Cheese     x" << q2 << "  $" << q2*P2 << endl;
+        if (q3 > 0) outFile << "Mushroom Swiss   x" << q3 << "  $" << q3*P3 << endl;
+        if (q4 > 0) outFile << "Western Burger   x" << q4 << "  $" << q4*P4 << endl;
+        if (q5 > 0) outFile << "Don Cali Burger  x" << q5 << "  $" << q5*P5 << endl;
+        outFile << "-----------------------------------" << endl;
+        outFile << "Subtotal:        $" << subtotal << endl;
+        outFile << "Tax:             $" << tax << endl;
+        outFile << "TOTAL:           $" << total << endl;
+        outFile << "-----------------------------------" << endl;
+        outFile.close();
     }
 
-    outFile.close();
     cout << "\nDONE! Your receipt is saved in output.txt" << endl;
 
     return 0;
 }
+
+/* SAMPLE OUTPUT 1 (Empty Cart Prevention):
+Please select an option (1-6): 6
+!! Your cart is empty. Please order something before checking out !!
+
+SAMPLE OUTPUT 2 (Successful Order):
+Select 1, Quantity 2, Select 6, Student
+Total: $10.50
+*/
