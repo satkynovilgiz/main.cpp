@@ -1,0 +1,8 @@
+--- Payroll Summary ---
+Company Name: Google
+Total Hours:  2000.00
+Hourly Rate:  $24.00
+Document ID:  #1210
+-----------------------
+The gross pay for Google is $71520.00
+Thank you for your hard work!

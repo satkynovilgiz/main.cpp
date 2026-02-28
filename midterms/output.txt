@@ -1,7 +1,7 @@
 --------- DE ANZA RECEIPT ---------
-Bacon Cheese     x3  $17.25
+Western Burger   x7  $41.65
 -----------------------------------
-Subtotal:        $17.25
+Subtotal:        $41.65
 Tax:             $0.00
-TOTAL:           $17.25
+TOTAL:           $41.65
 -----------------------------------
